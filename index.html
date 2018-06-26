@@ -19,7 +19,14 @@
 			link.type = 'text/css';
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
+        </script>
+        <style>
+
+            pre {
+                line-height: 12px !important;
+            }
+
+        </style>
 	</head>
 	<body>
 		<div class="reveal">`
@@ -53,7 +60,7 @@
                             <li>Actions</li>
                             <li>Reducers</li>
                         </ul>
-                    </section>                    
+                    </section>
                 </section>
                 <section>
                     <section>
@@ -63,7 +70,7 @@
                     </section>
                     <section>
                         <pre>
-                            <code data-trim data-noescape>
+                            <code data-trim data-noescape contenteditable>
                                 {
                                     type: LOGIN_USER,
                                     payload: {username: ‘sebastian’, password: ‘123456’}
@@ -75,7 +82,7 @@
                     <section>
                         <h3>To run the action we are <b>dispatching</b> the action.</h3>
                         <pre>
-                            <code data-trim data-noescape>
+                            <code data-trim data-noescape contenteditable>
                                 dispatch({type: LOGIN_USER});
                             </code>
                         </pre>
@@ -95,7 +102,7 @@
                     <section>
                         <h3>Example of reducer</h3>
                         <pre>
-                            <code data-trim data-noescape>
+                            <code data-trim data-noescape contenteditable>
                                 function myReducer (state , action)  {
                                     switch (action.type) {
                                         case 'LOGIN_USER':
@@ -175,7 +182,7 @@
                         <h5>fetching data from REST endpoint</h5>
                         <h6><i>rxjs ver. 5.*</i></h6>
                         <pre>
-                            <code data-trim data-noescape style="font-size: 14px;">
+                            <code data-trim data-noescape contenteditable style="font-size: 14px;">
                                 <pre>
                                     <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
                                         public getData(): Observable {
@@ -192,7 +199,7 @@
                     <section>
                         <h6><i>rxjs ver. 6.*</i></h6>
                         <pre>
-                            <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                            <code data-trim data-noescape contenteditable style="font-size: 14px; line-height: 16px;">
                                 public getData(): Observable {
                                     return this.http.get('apiUrl/something')
                                         .pipe(
@@ -246,7 +253,7 @@
                         <h1>Action creators</h1>
                         <p>In NGRX we are creating something called Action Creators which are Classes which implements Action interface from @ngrx/Store</p>
                         <pre>
-                            <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                            <code data-trim data-noescape contenteditable style="font-size: 14px; line-height: 16px;">
                                 export class AddTodoAction implements Action {
                                     readonly type = ADD_TODO;
 
@@ -258,7 +265,7 @@
                     <section>
                         <p>Then in file with actions we are exporting it like that (in this example we have some more actions like that).</p>
                         <pre>
-                            <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                            <code data-trim data-noescape contenteditable style="font-size: 14px; line-height: 16px;">
                                 // This union makes it easier for reducers to use only certain action types
                                 export type Actions
                                     = AddTodoAction
@@ -272,7 +279,7 @@
                     <section>
                         <p>To dispatch (run) our action in component we write something like that: </p>
                         <pre>
-                            <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                            <code data-trim data-noescape contenteditable style="font-size: 14px; line-height: 16px;">
                                 delete(id: number) {
                                     this.store.dispatch(new todo.RemoveTodoAction(id));
                                 }
@@ -289,7 +296,7 @@
                         <h1>Reducers</h1>
                         <p>Reducers in NGRX looks like that, just a function which wait for certain action and returns new state.</p>
                         <pre>
-                            <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                            <code data-trim data-noescape contenteditable style="font-size: 14px; line-height: 16px;">
                                 export function reducer(state: State = initialState, action: Action): State {
                                     switch(action.type) {
 
@@ -324,9 +331,9 @@
                     <section>
                         <h1>store.select</h1>
                         <pre>
-                            <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                            <code data-trim data-noescape contenteditable style="font-size: 14px; line-height: 16px;">
                                 this.todos$ = this.store.select&lt;fromTodos.State&gt;('todos')
-                                    .map( todos => { 
+                                    .map( todos => {
                                         return {
                                             ids: todos.ids.filter(id => !todos.entities[id].archived),
                                             entities: todos.entities
@@ -355,7 +362,7 @@
                     </section>
                     <section>
                         <pre>
-                            <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                            <code data-trim contenteditable data-noescape style="font-size: 14px; line-height: 16px;">
                                 efekty kurwa!!!!
                             </code>
                         </pre>
@@ -392,10 +399,149 @@
                             <li><a href="https://app.pluralsight.com/library/courses/play-by-play-angular-ngrx" target="_blank">Play by Play Angular ngrx, pluralsight</a></li>
                         </ul>
                     </section>
+                    <section>
+                        <h2>here is also ready boilerplate for you, to start paying with ngrx: </h2>
+                        <a href="ble ble ble github">Getting started with NGRX</a>
+                    </section>
                 </section>
                 <section>
                     <section>
                         <h1>Thx for attention</h1>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>bonus: how to start with NGRX</h1>
+                    </section>
+                    <section>
+                        <h4>create angular project with ng cli</h4>
+                    </section>
+                    <section>
+                        <h4>npm install --save @ngrx/store @ngrx/store-devtools @ngrx/router-store @ngrx/effects</h4>
+                    </section>
+                    <section>
+                        <h4>create action file and define const actions</h4>
+                        <pre>todos.actions.ts
+                            <code data-trim data-noescape contenteditable style="font-size: 10px; line-height: 12px;">
+                                import { Action } from '@ngrx/store';
+
+                                export const ADD_TODO = '[Todos] Add Todo';
+                                export const SOME_OTHER_ACTION = 'SOME_OTHER_ACTION';
+
+                                export class AddTodoAction implements Action {
+                                    readonly type = ADD_TODO;
+
+                                    constructor(public payload: any) {}
+                                }
+
+                                export class SomeOtherAction implements Action {
+                                    readonly type = SOME_OTHER_ACTION;
+
+                                    constructor(public payload: any) {}
+                                }
+
+                                export type Actions = AddTodoAction | SomeOtherAction;
+
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h4>create reducer file and define your reducers and default state of that chunk of state (in that example, todos array)</h4>
+                        <pre style="line-height: 12px">todos.reducer.ts
+                            <code data-trim data-noescape contenteditable style="font-size: 10px; line-height: 12px;">
+                                import { Action } from '@ngrx/store';
+
+                                import * as fromTodoActions from '../actions/todo.actions';
+
+                                export interface Todos {
+                                    id: number;
+                                    task: string;
+                                    year: number;
+                                    month: number;
+                                    day: number;
+                                    hour: number;
+                                    min: number;
+                                    archived: boolean;
+                                }
+
+                                export interface TodosState {
+                                    todos: Todos[];
+                                }
+
+                                export const initialState: TodosState = {
+                                    todos: [
+                                        {
+                                            id: 1,
+                                            task: 'Test 1',
+                                            year: 2017,
+                                            month: 5,
+                                            day: 6,
+                                            hour: 19,
+                                            min: 17,
+                                            archived: false,
+                                        },
+                                        {
+                                            id: 2,
+                                            task: 'Test 1',
+                                            year: 2018,
+                                            month: 7,
+                                            day: 2,
+                                            hour: 23,
+                                            min: 21,
+                                            archived: false,
+                                        }
+                                    ]
+                                };
+
+                                export function reducer(state: TodosState = initialState, action: Action): TodosState {
+                                    switch (action.type) {
+                                        case fromTodoActions.ADD_TODO:
+                                            return {
+                                                ...state,
+                                            };
+
+                                        default:
+                                            return state;
+                                    }
+                                }
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h4>in app.module.ts attach store to project, and pass object with all reducers </h4>
+                        <pre>app.module.ts
+                            <code data-trim data-noescape contenteditable style="font-size: 10px; line-height: 12px;">
+                                StoreModule.forRoot({todos: reducer}),
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h4>in component file inject store from @ngrx/store and dispatch action</h4>
+                        <pre>app.component.ts
+                            <code data-trim data-noescape contenteditable style="font-size: 10px; line-height: 12px;">
+                                import { Component } from '@angular/core';
+                                import { Store } from '@ngrx/store';
+
+                                import * as fromRootReducer from './reducers/app.reducer';
+                                import * as fromTodoActions from './actions/todo.actions';
+
+                                @Component({
+                                    selector: 'app-root',
+                                    templateUrl: './app.component.html',
+                                    styleUrls: ['./app.component.css']
+                                })
+                                export class AppComponent {
+                                    constructor( private store: Store<fromRootReducer.WholeState> ) {}
+
+
+                                    public addTodoAction() {
+                                        console.log('addTodoAction function from component');
+                                        this.store.dispatch(new fromTodoActions.AddTodoAction('whatever'));
+                                    }
+                                }
+                            </code>
+                        </pre>
                     </section>
                 </section>
 			</div>
