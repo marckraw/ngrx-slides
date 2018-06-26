@@ -1,0 +1,421 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">`
+			<div class="slides">
+				<section>
+                    <h1>NGRX - Redux state managment + RxJS</h1>
+                </section>
+				<section>
+                    <ol>
+                        <li>Redux</li>
+                        <li>RxJS</li>
+                        <li>NGRX</li>
+                    </ol>
+                </section>
+                <section>
+                    <section>
+                        <h1><a href="https://redux.js.org/" target="_blank">Redux</a></h1>
+                        <p>What is Redux state managment ? What it is all about ?</p>
+                    </section>
+                    <section>
+                        <p>
+                            By using Redux state managment we have central data store in our application. The store contains the state
+                            of application and is <strong>single source of truth</strong> for our components. By using that, we don't need to synchronize state between
+                            components manually. Instead we can fully rely on Redux store, our <b>single source of truth</b> at any time.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>Core principles of Redux:</h2>
+                        <ul>
+                            <li>Store</li>
+                            <li>Actions</li>
+                            <li>Reducers</li>
+                        </ul>
+                    </section>                    
+                </section>
+                <section>
+                    <section>
+                        <h2>Actions</h2>
+                        <p>Actions are used to send information from app to the store. We are using them to change some part of application state.</p>
+                        <p>Actions are just JavaScript object like that: </p>
+                    </section>
+                    <section>
+                        <pre>
+                            <code data-trim data-noescape>
+                                {
+                                    type: LOGIN_USER,
+                                    payload: {username: ‘sebastian’, password: ‘123456’}
+                                }
+                            </code>
+                        </pre>
+                        <p>Long story short, we say that we want to LOGIN_USER and that we want to pass also some payload information. Actions can be also without payload information</p>
+                    </section>
+                    <section>
+                        <h3>To run the action we are <b>dispatching</b> the action.</h3>
+                        <pre>
+                            <code data-trim data-noescape>
+                                dispatch({type: LOGIN_USER});
+                            </code>
+                        </pre>
+                        <p>...then it goes to...</p>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>Reducers</h2>
+                        <p>Reducers are the most important blocks of whole idea of Redux.</p>
+                        <p>Reducers are <b>pure functions</b> that take <b>current state application</b> and <b>action type</b>, then returns the new state of the application.</p>
+                        <p>They will never mutate the state, but the new state will be created.</p>
+                    </section>
+                    <section>
+                        <p>It is imoportant to understand what is <b>Pure functions</b>. Those are function which never do any side effects.</p>
+                    </section>
+                    <section>
+                        <h3>Example of reducer</h3>
+                        <pre>
+                            <code data-trim data-noescape>
+                                function myReducer (state , action)  {
+                                    switch (action.type) {
+                                        case 'LOGIN_USER':
+                                            return Object.assign({}, state, {
+                                                auth: action.payload
+                                            })
+                                        case 'LOGOUT_USER':
+                                        return Object.assign({}, state, {
+                                            auth: action.payload
+                                        })
+                                        default:
+                                            return state
+                                    }
+                                }
+                            </code>
+                        </pre>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>Store</h2>
+                        <p>The store is just JavaScript object, central object that hold whole state of application.</p>
+                    </section>
+                    <section>
+                        <h3>flow of redux application</h3>
+                        <img width="60%" src="./assets/img/redux-data-flow.png" alt="">
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h1>RxJS</h1>
+                        <p>What is RxJS ?</p>
+                        <p>RxJS is implementation of <b><a href="http://reactivex.io/" target="_blank">Reactive Extensions</a></b> in JavaScript.</p>
+                    </section>
+                    <section>
+                        <h3>Reactive Extensions</h3>
+                    </section>
+                    <section>
+                        <h4>Reactive Extensions</h4>
+                        <p>Reactive extensions is a library for composing asynchronous and event-based programs by using observables sequences.</p>
+                    </section>
+                    <section>
+                        <p>Very short description will be that Reactive Extensions are:</p>
+                        <ul>
+                            <li><a href="http://reactivex.io/documentation/observable.html">Observables</a></li>
+                            <li><a href="http://reactivex.io/documentation/operators.html">Operators</a></li>
+                            <li>Observer + Iterator pattern</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Observables...</h3>
+                        <p>... are sequences of items. We can think of Observable as an array of things in time.</p>
+                        <p></p>
+                        <p>We can create observables: </p>
+                        <ul>
+                            <li>from promise</li>
+                            <li>from events</li>
+                            <li>from Reactive Forms</li>
+                            <li>from array</li>
+                            <li>of anything, and others</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Operators...</h3>
+                        <p>... are special functions which are doing something with our sequence. We can filter, map, and for example merge two observables together.</p>
+                        <h5>Sample operators: </h5>
+                        <ul>
+                            <li>map</li>
+                            <li>filter</li>
+                            <li>mergeMap, flatMap</li>
+                            <li>takeLatest, takeUntil</li>
+                            <li>catch, retry, debounce</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h4>Some examples</h4>
+                        <h5>fetching data from REST endpoint</h5>
+                        <h6><i>rxjs ver. 5.*</i></h6>
+                        <pre>
+                            <code data-trim data-noescape style="font-size: 14px;">
+                                <pre>
+                                    <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                                        public getData(): Observable {
+                                            return this.http.get('apiUrl/something')
+                                                .map(res => res.json())
+                                                .filter(res => res.score > 5)
+                                                .catch(error => Observable.throw("An error has occured"));
+                                        }
+                                    </code>
+                                </pre>
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h6><i>rxjs ver. 6.*</i></h6>
+                        <pre>
+                            <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                                public getData(): Observable {
+                                    return this.http.get('apiUrl/something')
+                                        .pipe(
+                                            map(res => res.json()),
+                                            filter(res => res.score > 5),
+                                            catch(error => Observable.throw("An error has occured")),
+                                        );
+                                }
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h2>progress bar albo zaznaczanie liniowe mousein mouseoff (jak w skygate), albo smart counter z learnjs.io</h2>
+                        <p>??????</p>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h1>NGRX</h1>
+                        <ol>
+                            <li>Actions Creators</li>
+                            <li>Reducers</li>
+                            <li>@ngrx/Store</li>
+                            <li>Selectors</li>
+                            <li>@ngrx/Effects</li>
+                        </ol>
+                    </section>
+                    <section>
+                        <h2>NGRX flow</h2>
+                        <img src="./assets/img/ngrx flow.png" alt="">
+                    </section>
+                    <section>
+                        <h1>Actions</h1>
+                        <p>First, we want to define our actions as const variables like that:</p>
+                        <pre>
+                            <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                                export const ADD_TODO =       '[Todos] Add Todo';
+                                export const REMOVE_TODO =    '[Todos] Remove Todo';
+                                export const EDIT_TODO =      '[Todos] Edit Todo';
+                                export const ARCHIVE_TODO =   '[Todos] Archive Todo';
+                                export const UNARCHIVE_TODO = '[Todos] Unarchive Todo';
+                            </code>
+                        </pre>
+                        <p style="font-size: 12px;">We could just use strings in our application when we dispatch action, but with that approach we have 2 benefit: </p>
+                        <ul style="font-size: 12px;">
+                            <li>We have intelisense for our actions and we can use it like <span style="color: yellow">actions.ADD_TODO</span></li>
+                            <li>It is a common practice in NGRX to prefix action with kind of namespace like [Todos] for debugging purposes. (time travel debugging in devtools)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h1>Action creators</h1>
+                        <p>In NGRX we are creating something called Action Creators which are Classes which implements Action interface from @ngrx/Store</p>
+                        <pre>
+                            <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                                export class AddTodoAction implements Action {
+                                    readonly type = ADD_TODO;
+
+                                    constructor(public payload: Todo) { }
+                                }
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <p>Then in file with actions we are exporting it like that (in this example we have some more actions like that).</p>
+                        <pre>
+                            <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                                // This union makes it easier for reducers to use only certain action types
+                                export type Actions
+                                    = AddTodoAction
+                                    | RemoveTodoAction
+                                    | EditTodoAction
+                                    | ArchiveTodoAction
+                                    | UnarchiveTodoAction;
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <p>To dispatch (run) our action in component we write something like that: </p>
+                        <pre>
+                            <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                                delete(id: number) {
+                                    this.store.dispatch(new todo.RemoveTodoAction(id));
+                                }
+                            </code>
+                        </pre>
+
+                        <pre>
+                            <code data-trim data-noescape contenteditable>
+                                &lt;button (click)=&quot;delete(1)&quot;&gt;delete&lt;/button&gt;
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h1>Reducers</h1>
+                        <p>Reducers in NGRX looks like that, just a function which wait for certain action and returns new state.</p>
+                        <pre>
+                            <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                                export function reducer(state: State = initialState, action: Action): State {
+                                    switch(action.type) {
+
+                                        case todo.ADD_TODO:
+                                            let id = Math.max(...state.ids) + 1;
+                                            return {
+                                                ids: [...state.ids, id],
+                                                entities: {
+                                                ...state.entities,
+                                                [id]: action.payload
+                                                }
+                                            };
+
+                                        case todo.REMOVE_TODO:
+                                            return {
+                                                ids: state.ids.filter(id => id !== action.payload),
+                                                // Lodash omit function
+                                                entities: omit(state.entities, action.payload)
+                                            }
+
+                                        default:
+                                        return state;
+                                    }
+                                }
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h1>Selecting from state</h1>
+                        <p>We have store, we have actions and we have reducers which are changing our state through special action. Now, we want take some chunk of state and display it in components. There are two ways of doing that</p>
+                    </section>
+                    <section>
+                        <h1>store.select</h1>
+                        <pre>
+                            <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                                this.todos$ = this.store.select&lt;fromTodos.State&gt;('todos')
+                                    .map( todos => { 
+                                        return {
+                                            ids: todos.ids.filter(id => !todos.entities[id].archived),
+                                            entities: todos.entities
+                                        }
+                                    }
+                            </code>
+                        </pre>
+                        <p>In NGRX, store is always represented as Observable, and here comes RxJs. We can use whatever operator we want.</p>
+                    </section>
+                    <section>
+                        <h1>Selectors</h1>
+                        <p>????</p>
+                    </section>
+                    <section>
+                        <h1>@ngrx/effects</h1>
+                        <p>side effects for ngrx</p>
+                        <ul>
+                            <li>We can listen for @ngrx/store actions</li>
+                            <li>isolate side effects from components</li>
+                            <li>communicate outside of angular - http request for example</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>NGRX + effects flow</h2>
+                        <img src="./assets/img/ngrx plus effects flow.png" alt="">
+                    </section>
+                    <section>
+                        <pre>
+                            <code data-trim data-noescape style="font-size: 14px; line-height: 16px;">
+                                efekty kurwa!!!!
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h2>projekt 1</h2>
+                        <h3>Prosta aplikacja Todo z wykorzystaniem NGRX</h3>
+                        <p>Do tej aplikacji dodamy jeszcze biblitoeke @store/Effects by pokazać jak wykonuję się side efekty z wykorzystaniem NGRX</p>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h1>Redux DevTools and Time Travel</h1>
+                    </section>
+                    <section>
+                        <h2>tutaj screen z reduxa devtoolsa, albo gif, albo video albo live ktory pokazuje jak mozna przejsc przez wszystkie stany devtoolsach</h2>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h1>Resources and links</h1>
+                    </section>
+                    <section>
+                        <ul>
+                            <li><a href="https://www.youtube.com/watch?v=f97ICOaekNU" target="_blank">Simple and fast introduction to NGRX</a></li>
+                            <li><a href="https://redux.js.org/" target="_blank">Redux official</a></li>
+                            <li><a href="http://reactivex.io/intro.html" target="_blank">Reactive Extensions</a></li>
+                            <li><a href="http://rxmarbles.com/">RxMarbles - interactive marbles explain operators</a></li>
+                            <li><a href="https://www.learnrxjs.io/">Learn rxjs - documentation of operators and same recipies</a></li>
+                            <li><a href="http://ngrx.github.io/" target="_blank">ngrx</a></li>
+                            <li><a href="https://github.com/ngrx" target="_blank">ngrx github</a></li>
+                            <li><a href="https://toddmotto.com/ngrx/" target="_blank">Todd Motto ngrx tutorials</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=6Z-1v1UnoM8&t=14s" target="_blank">Understanding NGRX by building a Store - Keynote at ngPoland</a></li>
+                            <li><a href="https://app.pluralsight.com/library/courses/play-by-play-angular-ngrx" target="_blank">Play by Play Angular ngrx, pluralsight</a></li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h1>Thx for attention</h1>
+                    </section>
+                </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
