@@ -23,7 +23,11 @@
         <style>
 
             pre {
-                line-height: 12px !important;
+                line-height: 18px !important;
+            }
+
+            ul.resources li {
+                font-size: 16px !important;
             }
 
         </style>
@@ -97,28 +101,7 @@
                         <p>They will never mutate the state, but the new state will be created.</p>
                     </section>
                     <section>
-                        <p>It is imoportant to understand what is <b>Pure functions</b>. Those are function which never do any side effects.</p>
-                    </section>
-                    <section>
-                        <h3>Example of reducer</h3>
-                        <pre>
-                            <code data-trim data-noescape contenteditable style="font-size: 14px;">
-                                function myReducer (state , action)  {
-                                    switch (action.type) {
-                                        case 'LOGIN_USER':
-                                            return Object.assign({}, state, {
-                                                auth: action.payload
-                                            })
-                                        case 'LOGOUT_USER':
-                                        return Object.assign({}, state, {
-                                            auth: action.payload
-                                        })
-                                        default:
-                                            return state
-                                    }
-                                }
-                            </code>
-                        </pre>
+                        <p>It is important to remember that <b>Pure functions</b> never do any side effects.</p>
                     </section>
                 </section>
                 <section>
@@ -147,8 +130,8 @@
                     <section>
                         <p>Very short description will be that Reactive Extensions are:</p>
                         <ul>
-                            <li><a href="http://reactivex.io/documentation/observable.html">Observables</a></li>
-                            <li><a href="http://reactivex.io/documentation/operators.html">Operators</a></li>
+                            <li><a href="http://reactivex.io/documentation/observable.html" target="_blank">Observables</a></li>
+                            <li><a href="http://reactivex.io/documentation/operators.html" target="_blank">Operators</a></li>
                             <li>Observer + Iterator pattern</li>
                         </ul>
                     </section>
@@ -162,7 +145,7 @@
                             <li>from events</li>
                             <li>from Reactive Forms</li>
                             <li>from array</li>
-                            <li>of anything, and others</li>
+                            <li>and more</li>
                         </ul>
                     </section>
                     <section>
@@ -172,7 +155,7 @@
                         <ul>
                             <li>map</li>
                             <li>filter</li>
-                            <li>mergeMap, flatMap</li>
+                            <li>mergeMap, switchMap(flatMap)</li>
                             <li>takeLatest, takeUntil</li>
                             <li>catch, retry, debounce</li>
                         </ul>
@@ -212,8 +195,12 @@
                         </pre>
                     </section>
                     <section>
-                        <h2>progress bar albo zaznaczanie liniowe mousein mouseoff (jak w skygate), albo smart counter z learnjs.io</h2>
-                        <p>??????</p>
+                        <h2>Reactive Forms RxJS</h2>
+                        <a href="https://codecraft.tv/courses/angular/reactive-programming-with-rxjs/rxjs-and-angular/" target="_blank">Reactive Forms, observables</a>
+                    </section>
+                    <section>
+                        <h2>Progress bar with RxJS</h2>
+                        <a href="https://stackblitz.com/edit/rxjs-5-progress-bar-x33rrw?file=index.ts&devtoolsheight=50" target="_blank">Progress bar</a>
                     </section>
                 </section>
                 <section>
@@ -223,7 +210,6 @@
                             <li>Actions Creators</li>
                             <li>Reducers</li>
                             <li>@ngrx/Store</li>
-                            <li>Selectors</li>
                             <li>@ngrx/Effects</li>
                         </ol>
                     </section>
@@ -305,8 +291,8 @@
                                             return {
                                                 ids: [...state.ids, id],
                                                 entities: {
-                                                ...state.entities,
-                                                [id]: action.payload
+                                                    ...state.entities,
+                                                    [id]: action.payload
                                                 }
                                             };
 
@@ -318,7 +304,7 @@
                                             }
 
                                         default:
-                                        return state;
+                                            return state;
                                     }
                                 }
                             </code>
@@ -326,7 +312,7 @@
                     </section>
                     <section>
                         <h1>Selecting from state</h1>
-                        <p>We have store, we have actions and we have reducers which are changing our state through special action. Now, we want take some chunk of state and display it in components. There are two ways of doing that</p>
+                        <p>We have store, we have actions and we have reducers which are changing our state through special action. Now, we want take some chunk of state and display it in components.</p>
                     </section>
                     <section>
                         <h1>store.select</h1>
@@ -344,10 +330,6 @@
                         <p>In NGRX, store is always represented as Observable, and here comes RxJs. We can use whatever operator we want.</p>
                     </section>
                     <section>
-                        <h1>Selectors</h1>
-                        <p>????</p>
-                    </section>
-                    <section>
                         <h1>@ngrx/effects</h1>
                         <p>side effects for ngrx</p>
                         <ul>
@@ -360,25 +342,10 @@
                         <h2>NGRX + effects flow</h2>
                         <img src="./assets/img/ngrx plus effects flow.png" alt="">
                     </section>
-                    <section>
-                        <pre>
-                            <code data-trim contenteditable data-noescape style="font-size: 14px; line-height: 16px;">
-                                efekty kurwa!!!!
-                            </code>
-                        </pre>
-                    </section>
-                    <section>
-                        <h2>projekt 1</h2>
-                        <h3>Prosta aplikacja Todo z wykorzystaniem NGRX</h3>
-                        <p>Do tej aplikacji dodamy jeszcze biblitoeke @store/Effects by pokazać jak wykonuję się side efekty z wykorzystaniem NGRX</p>
-                    </section>
                 </section>
                 <section>
                     <section>
                         <h1>Redux DevTools and Time Travel</h1>
-                    </section>
-                    <section>
-                        <h2>tutaj screen z reduxa devtoolsa, albo gif, albo video albo live ktory pokazuje jak mozna przejsc przez wszystkie stany devtoolsach</h2>
                     </section>
                 </section>
                 <section>
@@ -386,13 +353,15 @@
                         <h1>Resources and links</h1>
                     </section>
                     <section>
-                        <ul>
-                            <li><a href="https://www.youtube.com/watch?v=f97ICOaekNU" target="_blank">Simple and fast introduction to NGRX</a></li>
+                        <ul class="resources">
                             <li><a href="https://redux.js.org/" target="_blank">Redux official</a></li>
                             <li><a href="http://reactivex.io/intro.html" target="_blank">Reactive Extensions</a></li>
-                            <li><a href="http://rxmarbles.com/">RxMarbles - interactive marbles explain operators</a></li>
-                            <li><a href="https://www.learnrxjs.io/">Learn rxjs - documentation of operators and same recipies</a></li>
+                            <li><a href="http://rxmarbles.com/" target="_blank">RxMarbles - interactive marbles explain operators</a></li>
+                            <li><a href="https://www.learnrxjs.io/" target="_blank">Learn rxjs - documentation of operators and same recipies</a></li>
+                            <li><a href="https://www.sitepoint.com/rxjs-functions-with-examples/" target="_blank">RXJS with examples</a></li>
+                            <li><a href="https://toddmotto.com/rxjs-observables-observers-operators" target="_blank">Todd motto - rxjs observables, observer pattern</a></li>
                             <li><a href="http://ngrx.github.io/" target="_blank">ngrx</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=f97ICOaekNU" target="_blank">Simple and fast introduction to NGRX</a></li>
                             <li><a href="https://github.com/ngrx" target="_blank">ngrx github</a></li>
                             <li><a href="https://toddmotto.com/ngrx/" target="_blank">Todd Motto ngrx tutorials</a></li>
                             <li><a href="https://www.youtube.com/watch?v=6Z-1v1UnoM8&t=14s" target="_blank">Understanding NGRX by building a Store - Keynote at ngPoland</a></li>
@@ -401,7 +370,7 @@
                     </section>
                     <section>
                         <h2>here is also ready boilerplate for you, to start paying with ngrx: </h2>
-                        <a href="ble ble ble github">Getting started with NGRX</a>
+                        <a href="https://github.com/marckraw/ngrx-simple-app" target="_blank">Getting started with NGRX</a>
                     </section>
                 </section>
                 <section>
